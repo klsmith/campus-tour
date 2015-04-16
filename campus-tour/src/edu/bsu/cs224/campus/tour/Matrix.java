@@ -1,5 +1,8 @@
 package edu.bsu.cs224.campus.tour;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Matrix {
 
 	public static final int NULL = -1;
@@ -45,5 +48,32 @@ public class Matrix {
 
 	public static class NoDistanceException extends Exception {
 		private static final long serialVersionUID = 5936439758540709300L;
+	}
+
+	public static Matrix buildFromFile(File file) throws FileNotFoundException {
+		return Parser.createForFile(file).parse();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (obj == null) {
+			return false;
+		} else if (obj instanceof Matrix) {
+			Matrix other = (Matrix) obj;
+			if (other.size() != size()) {
+				return false;
+			}
+			for (int x = 0; x < matrix.length; x++) {
+				for (int y = 0; y < matrix.length; y++) {
+					if (matrix[x][y] != other.matrix[x][y]) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 }
