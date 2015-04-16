@@ -15,16 +15,28 @@ public class Matrix {
 	}
 
 	public void setDistanceBetween(int pointA, int pointB, int distance) {
-		matrix[pointA][pointB] = distance;
+		setAppropriateDistance(pointA, pointB, distance);
+	}
+
+	private void setAppropriateDistance(int pointA, int pointB, int distance) {
+		int minPoint = Math.min(pointA, pointB);
+		int maxPoint = Math.max(pointA, pointB);
+		matrix[minPoint][maxPoint] = distance;
 	}
 
 	public int getDistanceBetween(int pointA, int pointB)
 			throws NoDistanceException {
-		int result = matrix[pointA][pointB];
+		int result = getAppropriateDistance(pointA, pointB);
 		if (result == NULL) {
 			throw new NoDistanceException();
 		}
 		return result;
+	}
+
+	private int getAppropriateDistance(int pointA, int pointB) {
+		int minPoint = Math.min(pointA, pointB);
+		int maxPoint = Math.max(pointA, pointB);
+		return matrix[minPoint][maxPoint];
 	}
 
 	public int size() {
