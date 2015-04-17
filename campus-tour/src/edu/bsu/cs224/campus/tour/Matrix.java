@@ -51,7 +51,7 @@ public class Matrix {
 	}
 
 	public static Matrix buildFromFile(File file) throws FileNotFoundException {
-		return Parser.createForFile(file).parse();
+		return MatrixBuilder.createForFile(file).build();
 	}
 
 	@Override

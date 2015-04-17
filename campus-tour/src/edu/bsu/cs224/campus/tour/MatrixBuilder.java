@@ -5,19 +5,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Parser {
+public class MatrixBuilder {
 	private Scanner data;
 
-	public static Parser createForFile(File file) throws FileNotFoundException {
-		return new Parser(file);
+	public static MatrixBuilder createForFile(File file) throws FileNotFoundException {
+		return new MatrixBuilder(file);
 	}
 
-	private Parser(File file) throws FileNotFoundException {
+	private MatrixBuilder(File file) throws FileNotFoundException {
 		data = new Scanner(new FileInputStream(file));
 		data.useDelimiter(";");
 	}
 
-	public Matrix parse() {
+	public Matrix build() {
 		Matrix matrix = Matrix.createWithSize(getSize());
 		while (data.hasNextLine()) {
 			String current = data.nextLine();
