@@ -6,7 +6,7 @@ public class Graph {
 
 	private int[][] matrix;
 
-	public static Graph blankWithNodeCount(int nodeCount) {
+	public static Graph createBlankWithNodeCount(int nodeCount) {
 		return new Graph(nodeCount);
 	}
 
@@ -14,11 +14,16 @@ public class Graph {
 		matrix = new int[nodeCount][nodeCount];
 	}
 
-	public static Graph createFrom(String matrix) {
-		return new Graph(matrix);
+	public static Graph createFrom(int nodeCount, String matrix) {
+		return new Graph(nodeCount, matrix);
 	}
 
-	private Graph(String matrix) {
+	private Graph(int nodeCount, String matrix) {
+		this(nodeCount);
+		populateWith(matrix);
+	}
+
+	public void populateWith(String matrix) {
 		Scanner lineScanner = new Scanner(matrix);
 		int x = 0;
 		int y = 0;
@@ -35,8 +40,8 @@ public class Graph {
 		lineScanner.close();
 	}
 
-	public void put(int distance, int x, int y) {
-		matrix[x][y] = distance;
+	public void put(int value, int x, int y) {
+		matrix[x][y] = value;
 	}
 
 	public int get(int x, int y) {
