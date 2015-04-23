@@ -12,4 +12,8 @@ public class GraphSolver {
 		this.graph = graph;
 	}
 
+	public Path solveFromNode(int node) {
+		return null;
+	}
+
 }

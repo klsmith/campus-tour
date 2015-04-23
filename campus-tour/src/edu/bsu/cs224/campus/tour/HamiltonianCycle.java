@@ -9,22 +9,22 @@ import java.util.Arrays;
 /** Class HamiltonianCycle **/
 public class HamiltonianCycle
 {
-    private int V, pathCount;
+    private int nodeCount, cursor;
     private int[] path;     
     private int[][] graph;
  
     /** Function to find cycle **/
     public void findHamiltonianCycle(int[][] g)
     {
-        V = g.length;
-        path = new int[V];
+        nodeCount = g.length;
+        path = new int[nodeCount];
  
         Arrays.fill(path, -1);
         graph = g;        
         try
         {            
             path[0] = 0;
-            pathCount = 1;            
+            cursor = 1;            
             solve(0);
             System.out.println("No solution");
         }
@@ -38,19 +38,19 @@ public class HamiltonianCycle
     public void solve(int vertex) throws Exception
     {
         /** solution **/
-        if (graph[vertex][0] == 1 && pathCount == V)
+        if (graph[vertex][0] == 1 && cursor == nodeCount)
             throw new Exception("Solution found");
         /** all vertices selected but last vertex not linked to 0 **/
-        if (pathCount == V)
+        if (cursor == nodeCount)
             return;
  
-        for (int v = 0; v < V; v++)
+        for (int v = 0; v < nodeCount; v++)
         {
             /** if connected **/
             if (graph[vertex][v] == 1 )
             {
                 /** add to path **/            
-                path[pathCount++] = v;    
+                path[cursor++] = v;    
                 /** remove connection **/            
                 graph[vertex][v] = 0;
                 graph[v][vertex] = 0;
@@ -63,14 +63,14 @@ public class HamiltonianCycle
                 graph[vertex][v] = 1;
                 graph[v][vertex] = 1;
                 /** remove path **/
-                path[--pathCount] = -1;                    
+                path[--cursor] = -1;                    
             }
         }
     }    
     /** function to check if path is already selected **/
     public boolean isPresent(int v)
     {
-        for (int i = 0; i < pathCount - 1; i++)
+        for (int i = 0; i < cursor - 1; i++)
             if (path[i] == v)
                 return true;
         return false;                
@@ -79,8 +79,8 @@ public class HamiltonianCycle
     public void display()
     {
         System.out.print("\nPath : ");
-        for (int i = 0; i <= V; i++)
-            System.out.print(path[i % V] +" ");
+        for (int i = 0; i <= nodeCount; i++)
+            System.out.print(path[i % nodeCount] +" ");
         System.out.println();
     }    
     /** Main function **/
